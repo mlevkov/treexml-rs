@@ -1,9 +1,7 @@
-extern crate treexml;
+use crate::treexml;
 
 mod write {
-
     mod document {
-
         use treexml::{Document, Element};
 
         #[test]
@@ -49,7 +47,6 @@ mod write {
     }
 
     mod element {
-
         use treexml::{Document, Element};
 
         #[test]
@@ -71,7 +68,6 @@ mod write {
     }
 
     mod contents {
-
         use treexml::{Document, Element};
 
         #[test]
@@ -112,7 +108,6 @@ mod write {
     }
 
     mod cdata {
-
         use treexml::{Document, Element};
 
         #[test]

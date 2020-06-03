@@ -1,9 +1,7 @@
-extern crate treexml;
+use crate::treexml;
 
 mod read {
-
     mod document {
-
         use treexml::{Document, XmlVersion};
 
         #[test]
@@ -37,7 +35,6 @@ mod read {
     }
 
     mod tags {
-
         use treexml::Document;
 
         #[test]
@@ -102,7 +99,7 @@ mod read {
             let doc = Document::parse(doc_raw.as_bytes()).unwrap();
             let root = doc.root.unwrap();
 
-            assert_eq!(root.find_child(|t| t.name == "child"), None);
+            assert_eq!(root.find_child(|t| t.name == "child".to_owned()), None);
         }
 
         #[test]
@@ -119,7 +116,10 @@ mod read {
             let mut child = Element::new("child");
             child.attributes.insert("attr_a".to_owned(), "1".to_owned());
 
-            assert_eq!(root.find_child(|t| t.name == "child"), Some(&child));
+            assert_eq!(
+                root.find_child(|t| t.name == "child".to_owned()),
+                Some(&child)
+            );
         }
 
         #[test]
@@ -137,7 +137,10 @@ mod read {
             let mut child = Element::new("child");
             child.attributes.insert("attr_a".to_owned(), "1".to_owned());
 
-            assert_eq!(root.find_child(|t| t.name == "child"), Some(&child));
+            assert_eq!(
+                root.find_child(|t| t.name == "child".to_owned()),
+                Some(&child)
+            );
         }
 
         #[test]
@@ -152,7 +155,9 @@ mod read {
             let mut root = doc.root.unwrap();
 
             {
-                let child = root.find_child_mut(|t| t.name == "child").unwrap();
+                let child = root
+                    .find_child_mut(|t| t.name == "child".to_owned())
+                    .unwrap();
                 let attr_a = child.attributes.get_mut(&"attr_a".to_owned()).unwrap();
                 *attr_a = "2".to_owned();
             }
@@ -160,7 +165,10 @@ mod read {
             let mut child = Element::new("child");
             child.attributes.insert("attr_a".to_owned(), "2".to_owned());
 
-            assert_eq!(root.find_child(|t| t.name == "child"), Some(&child));
+            assert_eq!(
+                root.find_child(|t| t.name == "child".to_owned()),
+                Some(&child)
+            );
         }
 
         #[test]
@@ -180,7 +188,9 @@ mod read {
             ch1.text = Some("1".to_owned());
             ch2.text = Some("2".to_owned());
 
-            let children: Vec<&Element> = root.filter_children(|t| t.name == "child").collect();
+            let children: Vec<&Element> = root
+                .filter_children(|t| t.name == "child".to_owned())
+                .collect();
             let children_ref = vec![&ch1, &ch2];
 
             assert_eq!(children, children_ref);
@@ -199,8 +209,9 @@ mod read {
             let mut root = doc.root.unwrap();
 
             {
-                let mut children: Vec<&mut Element> =
-                    root.filter_children_mut(|t| t.name == "child").collect();
+                let mut children: Vec<&mut Element> = root
+                    .filter_children_mut(|t| t.name == "child".to_owned())
+                    .collect();
                 children[0].text = Some("4".to_owned());
                 children[1].text = Some("5".to_owned());
             }
@@ -210,7 +221,9 @@ mod read {
             ch1.text = Some("4".to_owned());
             ch2.text = Some("5".to_owned());
 
-            let children: Vec<&Element> = root.filter_children(|t| t.name == "child").collect();
+            let children: Vec<&Element> = root
+                .filter_children(|t| t.name == "child".to_owned())
+                .collect();
             let children_ref = vec![&ch1, &ch2];
 
             assert_eq!(children, children_ref);
@@ -271,7 +284,6 @@ mod read {
     }
 
     mod cdata {
-
         use treexml::Document;
 
         #[test]
@@ -320,7 +332,6 @@ mod read {
     }
 
     mod complete {
-
         use treexml::{Document, Element, XmlVersion};
 
         #[test]

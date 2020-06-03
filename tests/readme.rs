@@ -1,4 +1,4 @@
-extern crate treexml;
+use crate::treexml;
 
 mod readme {
 
@@ -16,7 +16,10 @@ mod readme {
         let doc = Document::parse(doc_raw.as_bytes()).unwrap();
         let root = doc.root.unwrap();
 
-        let fruit = root.find_child(|tag| tag.name == "fruit").unwrap().clone();
+        let fruit = root
+            .find_child(|tag| tag.name == "fruit".to_owned())
+            .unwrap()
+            .clone();
         println!("{} [{:?}] = {:?}", fruit.name, fruit.attributes, fruit.text,);
     }
 
