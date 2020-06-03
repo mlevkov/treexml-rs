@@ -1,8 +1,8 @@
 extern crate treexml;
 
 mod readme {
-
     use treexml::{Document, ElementBuilder as E};
+
     #[test]
     fn read() {
         let doc_raw = r#"
