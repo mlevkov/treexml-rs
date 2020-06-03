@@ -1,4 +1,4 @@
-use crate::treexml;
+extern crate treexml;
 
 mod read {
     mod document {

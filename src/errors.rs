@@ -1,6 +1,11 @@
 use thiserror::Error;
+/*
 use xml;
-
+// this is redundant, cargo clippy suggested to remove it
+  = note: `#[warn(clippy::single_component_path_imports)]` on by default
+  = help: for further information visit
+  https://rust-lang.github.io/rust-clippy/master/index.html#single_component_path_imports
+*/
 #[derive(Debug, Error)]
 pub enum TreexmlError {
     #[error("Element not found: '{t}'")]
